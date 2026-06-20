@@ -155,3 +155,49 @@ a:hover{
         margin-top: 20px;
     }
 }
+
+/* ===== Custom styling ===== */
+
+/* Page backdrop: grid + soft teal/indigo glows */
+.container {
+    background-color: #0a0e14;
+    background-image:
+        radial-gradient(620px 340px at 18% 18%, rgba(18,168,156,.22), transparent 60%),
+        radial-gradient(620px 340px at 82% 88%, rgba(124,140,248,.20), transparent 60%),
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+}
+
+/* Card: animated aurora gradient + hover lift */
+.card-container {
+    background: linear-gradient(120deg, #024945, #12a89c, #1b3b6f, #024945);
+    background-size: 300% 300%;
+    animation: aurora 14s ease infinite;
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+.card-container:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 45px -12px rgba(0,0,0,.55);
+}
+@keyframes aurora {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* Photo: soft ring + glow, gentle zoom on card hover */
+.image img {
+    border: 3px solid rgba(255,255,255,.28);
+    box-shadow: 0 0 28px rgba(18,168,156,.45);
+    transition: transform .35s ease;
+}
+.card-container:hover .image img { transform: scale(1.04); }
+
+/* Icons: warm accent on hover (the lift is already built in) */
+.descripcion .icons a:hover { color: #f5b445; }
+
+/* Respect users who prefer no motion */
+@media (prefers-reduced-motion: reduce) {
+    .card-container { animation: none; }
+}
+
