@@ -1,6 +1,18 @@
 ---
 //src/layouts/BaseLayout.astro
-const { title = 'Personal Card Astro', description } = Astro.props;
+
+// Change this to your deployed URL (no trailing slash).
+const siteUrl = 'https://kosmicbyte.github.io';
+
+const {
+  title = 'Personal Card Astro',
+  description,
+  image = '/og-image.png',
+} = Astro.props;
+
+// Open Graph needs ABSOLUTE urls, not relative paths.
+const ogImage = new URL(image, siteUrl).href;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 
 import '../styles/global.css';
 ---
@@ -11,6 +23,26 @@ import '../styles/global.css';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content={description}>
+
+    <!-- CANONICAL -->
+    <link rel="canonical" href={canonicalUrl}>
+
+    <!-- OPEN GRAPH (LinkedIn, Facebook, WhatsApp, Slack) -->
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={ogImage}>
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content={canonicalUrl}>
+    <meta property="og:site_name" content={title}>
+
+    <!-- TWITTER / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={ogImage}>
+
     <!-- FAVICON -->
     <link rel="shortcut icon" href="..//favicon.svg" type="image/x-icon">
     <!-- GOOGLE FONTS -->
